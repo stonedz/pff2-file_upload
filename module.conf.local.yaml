@@ -1,0 +1,13 @@
+moduleConf:
+  #Directory to save files to. (base dir is app/public/ ,
+  # if dir: is set to "files" then the destination dir will be app/public/files)
+  dir: files
+
+  #
+  # backupDeletedFiles: false
+
+  validMimeTypes:
+    - application/pdf
+    - application/zip
+    - text/plain
+    - text/csv

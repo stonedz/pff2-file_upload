@@ -1,0 +1,4 @@
+name: pff2-file_upload
+version: "0.1"
+desc: Manage file uploads
+class: Pff2FileUpload

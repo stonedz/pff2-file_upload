@@ -1,0 +1,25 @@
+{
+	"name": "stonedz/pff2-file_upload",
+	"type": "pff2-module",
+	"description": "Manages file upload",
+	"license": "MIT",
+	"keywords": [
+		"pff2", "module", "files"
+	],
+	"authors": [
+		{
+			"name": "Paolo Fagni",
+			"email": "paolo.fagni@gmail.com",
+			"role": "Developer"
+		}
+	],
+	"homepage": "https://github.com/stonedz/pff2-file_upload",
+	"require": {
+		"stonedz/pff2-installers": "*" 	
+	},
+    "autoload": {
+        "psr-4": {
+            "pff\\modules\\": "src/"
+        }
+    }
+}
