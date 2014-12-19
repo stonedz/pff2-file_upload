@@ -46,7 +46,7 @@ class Pff2FileUpload extends AModule implements IConfigurableModule {
             return false;
         }
 
-        if(! move_uploaded_file($tmp_file, ROOT.DS.$new_name)) {
+        if(! move_uploaded_file($tmp_file, $new_name)) {
             throw new PffException('Error uploading the file', 500);
         }
 
