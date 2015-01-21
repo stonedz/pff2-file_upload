@@ -38,15 +38,16 @@ class Pff2FileUpload extends AModule implements IConfigurableModule {
      * @return bool|string
      */
     public function saveFile($fileArray) {
-        $tmp_file = $fileArray['tmp_name'];
-        $name     = $fileArray['name'];
-        $new_name = $this->fileDir.uniqid().$name;
+        $tmp_file      = $fileArray['tmp_name'];
+        $name          = $fileArray['name'];
+        $new_name      = uniqid().$name;
+        $new_full_name = $this->fileDir.$new_name;
 
         if(!$this->checkMimeType($fileArray['type'])) {
             return false;
         }
 
-        if(! move_uploaded_file($tmp_file, $new_name)) {
+        if(! move_uploaded_file($tmp_file, $new_full_name)) {
             throw new PffException('Error uploading the file', 500);
         }
 
