@@ -33,6 +33,8 @@ class Pff2FileUpload extends AModule implements IConfigurableModule {
 
 
     /**
+     * Salva il file
+     *
      * @param $fileArray
      * @throws PffException
      * @return bool|string
