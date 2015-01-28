@@ -76,8 +76,8 @@ class Pff2FileUpload extends AModule implements IConfigurableModule {
      */
     public function deleteFile($fileName) {
 
-        if(file_exists(ROOT.DS.$fileName)) {
-            unlink(ROOT.DS.$fileName);
+        if(file_exists($this->fileDir.$fileName)) {
+            unlink($this->fileDir.$fileName);
             return true;
         }
         else {
