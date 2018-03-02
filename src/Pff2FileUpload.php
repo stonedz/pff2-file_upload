@@ -36,13 +36,18 @@ class Pff2FileUpload extends AModule implements IConfigurableModule {
      * Salva il file
      *
      * @param $fileArray
+     * @param $add_uniqueid If true adds an uniqueid as a prefix
      * @throws PffException
      * @return bool|string
      */
-    public function saveFile($fileArray) {
+    public function saveFile($fileArray, $add_uniqueid = true) {
         $tmp_file      = $fileArray['tmp_name'];
         $name          = $fileArray['name'];
-        $new_name      = uniqid().$name;
+        if($add_uniqueid) {
+          $new_name      = uniqid().$name;
+        }
+        else {
+          $new_name      = $name;
         $new_full_name = $this->fileDir.$new_name;
 
         if(!$this->checkMimeType($fileArray['type'])) {
