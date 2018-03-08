@@ -48,6 +48,7 @@ class Pff2FileUpload extends AModule implements IConfigurableModule {
         }
         else {
           $new_name      = $name;
+        }
         $new_full_name = $this->fileDir.$new_name;
 
         if(!$this->checkMimeType($fileArray['type'])) {
