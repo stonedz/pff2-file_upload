@@ -36,20 +36,45 @@ class Pff2FileUpload extends AModule implements IConfigurableModule {
      * Salva il file
      *
      * @param $fileArray
-     * @param $add_uniqueid If true adds an uniqueid as a prefix
-     * @throws PffException
+     * @param bool If $add_uniqueid If true adds an uniqueid as a prefix
+     * @param null|string $dest name of the sub directory, WITH A TRAILING SLASH "example/"
+     * @param null|string $filename name to be given to the uploaded file
      * @return bool|string
      */
-    public function saveFile($fileArray, $add_uniqueid = true) {
+    public function saveFile($fileArray, $add_uniqueid = true, $dest = null, $filename = null) {
         $tmp_file      = $fileArray['tmp_name'];
         $name          = $fileArray['name'];
+
+        if($dest && substr($dest, -1) != '/') {
+            $dest = $dest.'/';
+        }
+
+
         if($add_uniqueid) {
-          $new_name      = uniqid().$name;
+            if($filename) {
+                $new_name = uniqid().$filename;
+            }
+            else {
+                $new_name = uniqid().$name;
+            }
         }
         else {
-          $new_name      = $name;
+            if($filename) {
+               $new_name = $filename;
+            }
+            else {
+                $new_name = $name;
+            }
         }
-        $new_full_name = $this->fileDir.$new_name;
+
+        $this->createDirIfNotExist($dest);
+
+        if($dest) {
+            $new_full_name = $this->fileDir.$dest.$new_name;
+        }
+        else {
+            $new_full_name = $this->fileDir.$new_name;
+        }
 
         if(!$this->checkMimeType($fileArray['type'])) {
             return false;
@@ -60,6 +85,21 @@ class Pff2FileUpload extends AModule implements IConfigurableModule {
         }
 
         return $new_name;
+    }
+
+    /**
+     * Checks if the new sub directory exists, if not creates it
+     *
+     * @param $dest_dir
+     * @return bool
+     */
+    private function createDirIfNotExist($dest_dir) {
+        if(file_exists($this->fileDir.$dest_dir)) {
+            return true;
+        }
+        else {
+            return mkdir($this->fileDir.$dest_dir, 0752);
+        }
     }
 
     /**
