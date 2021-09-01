@@ -17,6 +17,9 @@
 	"require": {
 		"stonedz/pff2-installers": "*" 	
 	},
+    "require-dev": {
+        "stonedz/pff2": "3.0.x-dev"
+    },
     "autoload": {
         "psr-4": {
             "pff\\modules\\": "src/"
